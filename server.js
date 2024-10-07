@@ -1,0 +1,9 @@
+const bcrypt = require("bcrypt");
+const saltRounds = 12;
+const express = require("express");
+const sqlite3 = require("sqlite3");
+const session = require("express-session");
+const connectSqlite3 = require("connect-sqlite3");
+const port = 8080;
+const app = express();
+const { engine } = require("express-handlebars");
