@@ -1,0 +1,28 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <title>Lab_3</title>
+  </head>
+  <body>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="/">Home</a></li>
+          <li><a href="/projects">uhhh who knows</a></li>
+          <li><a href="/about">About me</a></li>
+          <li><a href="/contact">Contact</a></li>
+          {{#if isLoggedIn}}
+            <li id="menuLogout">Hi
+              {{session.name}}! -
+              <a href="/logout">Logout</a></li>
+          {{else}}
+            <li id="menuLogin"><a href="/login">Login</a></li>
+          {{/if}}
+        </ul>
+      </nav>
+    </header>
+    {{{body}}}
+  </body>
+</html>

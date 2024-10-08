@@ -1,0 +1,18 @@
+<div>
+  <h1>Login Pwease</h1>
+  <div>
+    <form action="/login" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" /><br />
+      <label for="password">Password:</label>
+      <input type="text" id="password" name="password" /><br />
+      <input type="submit" value="Login" />
+    </form>
+    {{#if error}}
+      <div class="error">{{error}}</div>
+    {{/if}}
+    {{#if message}}
+      <div class="message">{{message}}</div>
+    {{/if}}
+  </div>
+</div>
