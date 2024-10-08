@@ -1,0 +1,43 @@
+<div>
+  <div>
+    {{#if game.gid}}
+      <h1> Modify this game girl</h1>
+    {{else}}
+      <h1>Add a New Game TM ...!</h1>
+    {{/if}}
+  </div>
+  
+  <div>
+    {{#if game.gid}}
+      <form action="/game/modify/{{game.gid}}" method="POST">
+    {{else}}
+      <form action="/game/new" method="POST">
+    {{/if}}
+        <label for="gamename">Name: </label>
+        <input type="text" name="gamename" required="required" {{#if game.gname}} value="{{game.gname}}" {{/if}} />
+        <br />
+        <label for="gameyear">Year: </label>
+        <input
+          type="number"
+          name="gameyear"
+          min="1990"
+          max="2050"
+          required="required" {{#if game.gyear}} value="{{game.gyear}}" {{/if}}
+        />
+        <br />
+        <label for="gamedesc">Game description: </label>
+        <textarea name="gamedesc" required="required" {{#if game.gdesc}} value="{{game.gdesc}}" {{/if}}></textarea>
+        <br />
+
+        <label for="gameurl">URL: </label>
+        <input
+          type="text"
+          name="gameurl"
+          placeholder="/img/something.jpg"
+          required="required" {{#if game.gurl}} value="{{game.gurl}}" {{/if}}
+        />
+        <br />
+        <input type="submit" value={{#if game.gid}}"modify this game" {{else}}"add new game"{{/if}} />
+      </form>
+  </div>
+</div>

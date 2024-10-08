@@ -1,0 +1,55 @@
+/* BASIC */
+div,
+h1,
+h2,
+p,
+li {
+  color: #f4f2ff;
+}
+
+body {
+  background-color: #313036;
+}
+
+a {
+  color: #f4f2ff;
+}
+/* HEADER */
+header,
+nav {
+  display: flex;
+  width: 100%;
+  flex-flow: row nowrap;
+  background-color: #f4f2ff;
+  border-radius: 15px;
+}
+
+#navList {
+  display: flex;
+  width: 100%;
+  list-style: none;
+  text-align: center;
+  justify-content: center;
+}
+
+.navList {
+  flex-grow: 1;
+}
+
+.navList > a {
+  color: #313036;
+}
+
+/* IMAGES */
+/* dogs */
+#dogs {
+  display: flex;
+  height: 80%;
+  justify-content: space-evenly;
+}
+
+.dogs {
+  height: 80%;
+  border-radius: 15px;
+  box-shadow: 10px 10px #f4f2ff;
+}

@@ -1,0 +1,19 @@
+<div>
+  <h1>Games</h1>
+  {{#if session.isAdmin}}
+    <div><a href="/game/new">add a new game!</a></div>
+  {{/if}}
+    <ul>
+      {{#each games}}
+        <li>
+          <img src="ICON" alt="HERE">
+          <a href="/game/{{gid}}">{{gname}}</a> ({{gyear}})
+          {{#if ../session.isAdmin}}
+            ---
+            <a href="/game/modify/{{gid}}" class="modify">modify</a>
+            <a href="/game/delete/{{gid}}" class="delete">delete</a>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+</div>
