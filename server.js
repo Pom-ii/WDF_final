@@ -17,7 +17,7 @@ const { engine } = require("express-handlebars");
 const dbFile = "WDF-final.db";
 db = new sqlite3.Database(dbFile);
 
-// code for hashing password
+//BCRYPT code for hashing password
 /* bcrypt.hash(adminPassword, saltRounds, function (err, hash) {
   if (err) {
     console.log("---> Error encrypting the password: ", err);
@@ -66,6 +66,7 @@ app.use((req, res, next) => {
 app.post("/login", (req, res) => {
   const { username, password } = req.body;
   if (!username || !password) {
+    //check if either username or password are not typed in
     const model = {
       error: "Username & Password are required >:[",
       message: "",
@@ -73,19 +74,11 @@ app.post("/login", (req, res) => {
     return res.status(400).render("login", model);
   }
   if (username === adminName) {
-    /* if (password === adminPassword) {
-        const model = { error: "", message: "My Lord! Welcome back." };
-        res.render("login", model);
-      } else {
-        const model = {
-          error: "Kwitten, pwease twy agwain, I know you can do it...",
-          message: "",
-        };
-        res.status(400).render("login", model);
-      } */
-
+    // compare username to user input
     bcrypt.compare(password, adminPassword, (err, result) => {
+      //compare user input & admin password
       if (err) {
+        //error during comparison
         const model = {
           error: "Error while comparing passwords: " + err,
           message: "",
@@ -94,23 +87,21 @@ app.post("/login", (req, res) => {
       }
 
       if (result) {
+        //user input & admin password are the same
         //save in session
         req.session.isAdmin = true;
         req.session.isLoggedIn = true;
         req.session.name = username;
         console.log("Session info: " + JSON.stringify(req.session));
-        // build model for html
-        /* const model = {
-            error: "",
-            message: "Admin detected, welcome Master ... wtf", 
-          }; */
         res.redirect("/");
       } else {
+        //user input is not the admin password
         const model = { error: "Wring password, I'm afraid...", message: "" };
         res.status(400).render("login", model);
       }
     });
   } else {
+    //user input does not match admin username
     const model = {
       error: "Sowwy bwut this is not my wittwe kwitten... Leave",
       message: "",
@@ -120,16 +111,20 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/game/new", (req, res) => {
+  //new game details were added and submit button pressed
   const name = req.body.gamename;
   const year = req.body.gameyear;
   const desc = req.body.gamedesc;
-  const url = req.body.gameurl;
+  const icon = req.body.gameicon;
+  const big = req.body.gamebig;
 
+  //add new record to games table (CREATE)
   db.run(
-    "INSERT INTO games (gname, gyear, gdesc, gurl) VALUES (?, ?, ?, ?)",
-    [name, year, desc, url],
+    "INSERT INTO games (gname, gyear, gdesc, gicon, gbig) VALUES (?, ?, ?, ?,?)",
+    [name, year, desc, icon, big],
     (error) => {
       if (error) {
+        //error log
         console.log("Error when trying to add game: " + error);
         res.redirect("/games");
       } else {
@@ -141,17 +136,21 @@ app.post("/game/new", (req, res) => {
 });
 
 app.post("/game/modify/:gameid", (req, res) => {
+  //new game details were added and submit button pressed
   const id = req.params.gameid;
   const name = req.body.gamename;
   const year = req.body.gameyear;
   const desc = req.body.gamedesc;
-  const url = req.body.gameurl;
+  const icon = req.body.gameicon;
+  const big = req.body.gamebig;
 
+  //specific record in games table is updated with new information (UPDATE)
   db.run(
-    "UPDATE games SET gname=?, gyear=?, gdesc=?, gurl=? WHERE gid=?",
-    [name, year, desc, url, id],
+    "UPDATE games SET gname=?, gyear=?, gdesc=?, gicon=?, gbig=? WHERE gid=?",
+    [name, year, desc, icon, big, id],
     (error) => {
       if (error) {
+        //error log
         console.log("ERROR updating games: " + error);
         res.redirect("/games");
       } else {
@@ -164,18 +163,22 @@ app.post("/game/modify/:gameid", (req, res) => {
 
 //ROUTES
 app.get("/", (req, res) => {
+  //render home page
   res.render("home");
 });
 
 app.get("/about", (req, res) => {
+  //render about me page
   res.render("about");
 });
 
 app.get("/contact", (req, res) => {
+  //render contact page
   res.render("contact");
 });
 
 app.get("/games", (req, res) => {
+  //list all records from games table & render games page (READ)
   db.all("SELECT * FROM games", (error, listOfGames) => {
     if (error) {
       console.log("ERROR: ", error);
@@ -187,16 +190,19 @@ app.get("/games", (req, res) => {
 });
 
 app.get("/game/new", (req, res) => {
+  //render new game page for adding a new game to the table
   console.log("clicked on add new game");
   res.render("new-game");
 });
 
 app.get("/game/:gameid", (req, res) => {
+  //render specific game page (READ table)
   db.get(
     "SELECT * FROM games WHERE gid=?",
     [req.params.gameid],
     (error, theGame) => {
       if (error) {
+        //error log
         console.log("ERROR: " + error);
       } else {
         const model = {
@@ -209,8 +215,10 @@ app.get("/game/:gameid", (req, res) => {
 });
 
 app.get("/game/delete/:gameid", (req, res) => {
+  // (DELETE) delete specific game from games table & render games page
   db.run("DELETE FROM games WHERE gid=?", [req.params.gameid], (error) => {
     if (error) {
+      //error log
       console.log("ERROR couldn't delete game: " + error);
     } else {
       console.log("The game" + req.params.gameid + " has been deleted...");
@@ -220,9 +228,11 @@ app.get("/game/delete/:gameid", (req, res) => {
 });
 
 app.get("/game/modify/:gameid", (req, res) => {
+  //render modification page to edit an existing record in games table (UPDATE)
   const id = req.params.gameid;
   db.get("SELECT * FROM games WHERE gid =?", [id], (error, theGame) => {
     if (error) {
+      //error log
       console.log("ERROR trying to modify game: " + error);
       res.redirect("/games");
     } else {
@@ -233,8 +243,10 @@ app.get("/game/modify/:gameid", (req, res) => {
 });
 
 app.get("/consoles", (req, res) => {
+  //list all records from consoles table & render games page (READ)
   db.all("SELECT * FROM consoles", (error, listOfConsoles) => {
     if (error) {
+      //error log
       console.log("ERROR: ", error);
     } else {
       model = { consoles: listOfConsoles };
@@ -244,12 +256,15 @@ app.get("/consoles", (req, res) => {
 });
 
 app.get("/login", (req, res) => {
+  //render login page
   res.render("login");
 });
 
 app.get("/logout", (req, res) => {
+  //destroy previously logged in session and redirect to home page
   req.session.destroy((err) => {
     if (err) {
+      //error log
       console.log("Couldn't destroy session: " + err);
     } else {
       console.log("Logged out succesfully");
@@ -266,52 +281,98 @@ function initTableGames(anyDb) {
       name: "Bioshock",
       desc: "In 1960, the protagonist, Jack, is a passenger on a plane that crashes in the Atlantic Ocean. The only survivor, Jack makes his way to a nearby lighthouse; inside is a bathysphere that takes him to Rapture. Jack is contacted via radio by Atlas, who helps guide him through the ruined city.",
       year: 2007,
-      url: "/img/counting.png",
+      icon: "/img/bioshock.jpg",
+      big: "/img/bioshock_big.png",
     },
     {
       id: "1",
       name: "Omori",
       desc: "In this game, you play as OMORI, a young man in black and white, who goes to visits his friends when he finds out his best friend, Basil, disappeared the previous day.",
       year: 2020,
-      url: "/img/medical.png",
+      icon: "/img/omori.png",
+      big: "/img/omori_big.jpg",
     },
     {
       id: "2",
       name: "Prey",
       desc: "Morgan Yu is trapped aboard a space station filled with shape-shifting aliens with no memory of how he got there. Guided by a mysterious stranger and his former self, he must set the station's self-destruct before the aliens reach Earth.",
       year: 2017,
-      url: "/img/qcm07.png",
+      icon: "/img/prey.png",
+      big: "/img/prey_big.jpg",
     },
     {
       id: "3",
       name: "The Last of Us",
       desc: "In a ravaged civilization, where infected and hardened survivors run rampant, Joel, a weary protagonist, is hired to smuggle 14-year-old Ellie out of a military quarantine zone. However, what starts as a small job soon transforms into a brutal cross-country journey.",
       year: 2013,
-      url: "/img/diaw02.png",
+      icon: "/img/tlou.png",
+      big: "/img/tlou_big.png",
     },
     {
       id: "4",
       name: "Inscryption",
       desc: "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscribed upon the cards.",
       year: 2021,
-      url: "/img/management.png",
+      icon: "/img/inscryption.png",
+      big: "/img/inscryption_big.png",
+    },
+    {
+      id: "5",
+      name: "Resident Evil II (Remake)",
+      desc: "Leon S Kennedy a rookie cop with the RPD and Claire Redfield are stuck in Raccoon City during the outbreak and have to survive the oncoming zombie hordes and track down Claire's brother Chris.",
+      year: 2019,
+      icon: "/img/re.png",
+      big: "/img/re_big.png",
+    },
+    {
+      id: "6",
+      name: "Strange Horticulture",
+      desc: "Described as an 'occult puzzle game', Strange Horticulture involves the discovery and identification of a fictitious herbarium of plants for sale to a range of mysterious and unscrupulous customers.",
+      year: 2022,
+      icon: "/img/sh.ico",
+      big: "/img/sh_big.jpg",
+    },
+    {
+      id: "7",
+      name: "Little Nightmares",
+      desc: "Set in a mysterious world, Little Nightmares follows the journey of Six, a hungry little girl who must escape the Maw, an iron vessel inhabited by monstrous, twisted beings.",
+      year: 2017,
+      icon: "/img/ln.ico",
+      big: "/img/ln_big.jpg",
+    },
+    {
+      id: "8",
+      name: "Professor Layton and the Diaboloical Box ",
+      desc: "The game follows Professor Layton and his self-proclaimed apprentice Luke as they travel cross-country by train to solve the mystery behind a mysterious box that is said to kill anyone who opens it. ",
+      year: 2007,
+      icon: "/img/pl.png",
+      big: "/img/pl_big.jpg",
     },
   ];
 
   anyDb.run(
-    "CREATE TABLE games (gid INTEGER PRIMARY KEY AUTOINCREMENT, gname TEXT NOT NULL, gdesc TEXT NOT NULL, gyear INT, gurl TEXT NOT NULL)",
+    "CREATE TABLE games (gid INTEGER PRIMARY KEY AUTOINCREMENT, gname TEXT NOT NULL, gdesc TEXT NOT NULL, gyear INT, gicon TEXT NOT NULL, gbig TEXT NOT NULL)",
     (error) => {
       if (error) {
+        //error log
         console.log("ERROR", error);
       } else {
         console.log("---> Table games created!");
 
         games.forEach((oneGame) => {
           anyDb.run(
-            "INSERT INTO games (gid, gname, gdesc, gyear, gurl) VALUES (?, ?, ?, ?, ?)",
-            [oneGame.id, oneGame.name, oneGame.desc, oneGame.year, oneGame.url],
+            "INSERT INTO games (gid, gname, gdesc, gyear, gicon, gbig) VALUES (?, ?, ?, ?, ?,?)",
+            [
+              oneGame.id,
+              oneGame.name,
+              oneGame.desc,
+              oneGame.year,
+              oneGame.icon,
+              oneGame.big,
+            ],
             (error) => {
               if (error) {
+                //error log
                 console.log("ERROR: ", error);
               } else {
                 console.log("Line added into the games table!");
@@ -362,6 +423,7 @@ function initTableConsoles(anyDb) {
     "CREATE TABLE consoles (cid INTEGER PRIMARY KEY AUTOINCREMENT, cname TEXT NOT NULL, cyear INT, cbrand TEXT NOT NULL)",
     (error) => {
       if (error) {
+        //error log
         console.log("ERROR", error);
       } else {
         console.log("---> Table consoles created!");
@@ -372,6 +434,7 @@ function initTableConsoles(anyDb) {
             [oneConsole.id, oneConsole.name, oneConsole.year, oneConsole.brand],
             (error) => {
               if (error) {
+                //error log
                 console.log("ERROR: ", error);
               } else {
                 console.log("Line added into the consoles table!");

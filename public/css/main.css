@@ -1,19 +1,43 @@
+/* VARIABLES */
+:root {
+  --bgWhite: rgb(244, 242, 255, 0.33);
+}
+
 /* BASIC */
-div,
-h1,
-h2,
-p,
-li {
+* {
   color: #f4f2ff;
+  font-family: "poppins", sans-serif;
+  font-size: 14pt;
 }
 
 body {
   background-color: #313036;
 }
 
+h1 {
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
 a {
   color: #f4f2ff;
 }
+
+a:hover {
+  text-decoration: none;
+}
+
+p {
+  text-align: center;
+}
+
+ul {
+  list-style: none;
+}
+
 /* HEADER */
 header,
 nav {
@@ -27,21 +51,21 @@ nav {
 #navList {
   display: flex;
   width: 100%;
-  list-style: none;
   text-align: center;
   justify-content: center;
 }
 
 .navList {
   flex-grow: 1;
+  color: #313036;
 }
 
 .navList > a {
   color: #313036;
 }
 
-/* IMAGES */
-/* dogs */
+/* ABOUT */
+/* images */
 #dogs {
   display: flex;
   height: 80%;
@@ -52,4 +76,132 @@ nav {
   height: 80%;
   border-radius: 15px;
   box-shadow: 10px 10px #f4f2ff;
+}
+
+/* text boxes */
+h1,
+h2 {
+  text-align: center;
+}
+
+#aboutDesc {
+  display: flex;
+  justify-content: center;
+}
+
+#aboutDesc > p {
+  line-height: 1.5em;
+  padding: 1em;
+  background-color: var(bgWhite);
+  border-radius: 15px;
+  width: fit-content;
+}
+
+/* CONTACT */
+#contact {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+#contactList {
+  background-color: var(--bgWhite);
+  border-radius: 15px;
+  width: fit-content;
+  padding: 1em;
+}
+
+/* GAMES & CONSOLES */
+/* images */
+.gameIcons {
+  height: 2em;
+}
+
+#games,
+#consoles {
+  display: flex;
+  justify-content: center;
+}
+
+#gamesList,
+#consolesList {
+  width: fit-content;
+  border-radius: 15px;
+  background-color: var(--bgWhite);
+  padding: 1.5em 1.25em;
+}
+
+#gamesList > li,
+#consolesList > li {
+  display: flex;
+  font-size: 16pt;
+  align-items: center;
+}
+
+#consolesList > li {
+  line-height: 1.5em;
+}
+
+img ~ a {
+  padding: 1em;
+}
+
+#addNew {
+  text-align: center;
+}
+
+/* GAME VIEW */
+.bigImg {
+  display: flex;
+  justify-content: center;
+  padding: 0 0 2em 0;
+}
+
+.bigImg > img {
+  border-radius: 15px;
+  width: 90%;
+  box-shadow: 10px 10px #f4f2ff;
+}
+
+#game {
+  display: flex;
+  justify-content: center;
+}
+
+#game > p {
+  width: 75%;
+  border-style: solid;
+  border-width: 5px;
+  border-radius: 15px;
+  border-color: #f4f2ff;
+  padding: 1em 0.75em;
+}
+
+/* LOGIN */
+#login {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: center;
+}
+
+form {
+  background-color: var(--bgWhite);
+  border-radius: 15px;
+  text-align: center;
+  line-height: 1.75em;
+  padding: 1em;
+}
+
+form input,
+[type="submit"] {
+  color: #313036;
+}
+
+form label {
+  padding: 1em;
+}
+
+#message,
+#error {
+  text-align: center;
 }

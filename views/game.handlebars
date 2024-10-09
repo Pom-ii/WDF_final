@@ -1,14 +1,9 @@
 <div>
-  <h1>{{game.gname}}</h1>
-  <div>
-    {{game.gname}}
-    //
-    {{game.gyear}}
-    //
-    <br />
-    {{game.gdesc}}
+  <h1>{{game.gname}} ({{game.gyear}})</h1>
+  <div class="bigImg">
+    <img src="{{game.gbig}}" alt="{{game.gbig}}" />
   </div>
-  <div>
-    <img src="{{game.gurl}}" alt="{{game.gurl}}" />
+  <div id="game">
+    <p>{{game.gdesc}}</p>
   </div>
 </div>

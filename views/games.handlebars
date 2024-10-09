@@ -1,12 +1,10 @@
 <div>
   <h1>Games</h1>
-  {{#if session.isAdmin}}
-    <div><a href="/game/new">add a new game!</a></div>
-  {{/if}}
-    <ul>
+  <div id="games">
+    <ul id="gamesList">
       {{#each games}}
         <li>
-          <img src="ICON" alt="HERE">
+          <img class="gameIcons" src="{{gicon}}" alt="{{gicon}}">
           <a href="/game/{{gid}}">{{gname}}</a> ({{gyear}})
           {{#if ../session.isAdmin}}
             ---
@@ -16,4 +14,8 @@
         </li>
       {{/each}}
     </ul>
+  </div>
+  {{#if session.isAdmin}}
+    <div id="addNew"><h2><a href="/game/new">add a new game!</a></h2></div>
+  {{/if}}
 </div>
