@@ -38,6 +38,9 @@ app.engine(
       eq: function (a, b) {
         return a == b;
       },
+      lookup: function (obj, field) {
+        return obj && obj[field];
+      },
     },
   })
 );
@@ -159,12 +162,35 @@ app.post("/game/modify/:gameid", (req, res) => {
     }
   );
 });
+
+app.post("/", (req, res) => {
+  model = {
+    whichPartial: function () {
+      return "page2";
+    },
+  };
+  res.render("home", model);
+});
 //--------------------------------------------------------------------------
 
 //ROUTES
 app.get("/", (req, res) => {
   //render home page
-  res.render("home");
+  /* res.render("home"); */
+
+  db.all("SELECT * FROM games", (error, listOfGames) => {
+    if (error) {
+      console.log("ERROR: ", error);
+    } else {
+      model = {
+        game: listOfGames,
+        whichPartial: function () {
+          return "page1";
+        },
+      };
+      res.render("home", model);
+    }
+  });
 });
 
 app.get("/about", (req, res) => {

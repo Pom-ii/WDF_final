@@ -1,7 +1,11 @@
 <div>
   <h1>Game Spot</h1>
   <h2>New Additions!</h2>
-  <div>
-    pagination here
-  </div>
+  {{#if whichPartial}}
+    <div>
+      {{> (whichPartial)}}
+    </div>
+  {{else}}
+    <div>this is shown instead</div>
+  {{/if}}
 </div>
