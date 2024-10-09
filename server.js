@@ -277,7 +277,7 @@ app.get("/logout", (req, res) => {
 function initTableGames(anyDb) {
   const games = [
     {
-      id: "0",
+      id: "1",
       name: "Bioshock",
       desc: "In 1960, the protagonist, Jack, is a passenger on a plane that crashes in the Atlantic Ocean. The only survivor, Jack makes his way to a nearby lighthouse; inside is a bathysphere that takes him to Rapture. Jack is contacted via radio by Atlas, who helps guide him through the ruined city.",
       year: 2007,
@@ -285,7 +285,7 @@ function initTableGames(anyDb) {
       big: "/img/bioshock_big.png",
     },
     {
-      id: "1",
+      id: "2",
       name: "Omori",
       desc: "In this game, you play as OMORI, a young man in black and white, who goes to visits his friends when he finds out his best friend, Basil, disappeared the previous day.",
       year: 2020,
@@ -293,7 +293,7 @@ function initTableGames(anyDb) {
       big: "/img/omori_big.jpg",
     },
     {
-      id: "2",
+      id: "3",
       name: "Prey",
       desc: "Morgan Yu is trapped aboard a space station filled with shape-shifting aliens with no memory of how he got there. Guided by a mysterious stranger and his former self, he must set the station's self-destruct before the aliens reach Earth.",
       year: 2017,
@@ -301,7 +301,7 @@ function initTableGames(anyDb) {
       big: "/img/prey_big.jpg",
     },
     {
-      id: "3",
+      id: "4",
       name: "The Last of Us",
       desc: "In a ravaged civilization, where infected and hardened survivors run rampant, Joel, a weary protagonist, is hired to smuggle 14-year-old Ellie out of a military quarantine zone. However, what starts as a small job soon transforms into a brutal cross-country journey.",
       year: 2013,
@@ -309,7 +309,7 @@ function initTableGames(anyDb) {
       big: "/img/tlou_big.png",
     },
     {
-      id: "4",
+      id: "5",
       name: "Inscryption",
       desc: "Inscryption is an inky black card-based odyssey that blends the deckbuilding roguelike, escape-room style puzzles, and psychological horror into a blood-laced smoothie. Darker still are the secrets inscribed upon the cards.",
       year: 2021,
@@ -317,7 +317,7 @@ function initTableGames(anyDb) {
       big: "/img/inscryption_big.png",
     },
     {
-      id: "5",
+      id: "6",
       name: "Resident Evil II (Remake)",
       desc: "Leon S Kennedy a rookie cop with the RPD and Claire Redfield are stuck in Raccoon City during the outbreak and have to survive the oncoming zombie hordes and track down Claire's brother Chris.",
       year: 2019,
@@ -325,7 +325,7 @@ function initTableGames(anyDb) {
       big: "/img/re_big.png",
     },
     {
-      id: "6",
+      id: "7",
       name: "Strange Horticulture",
       desc: "Described as an 'occult puzzle game', Strange Horticulture involves the discovery and identification of a fictitious herbarium of plants for sale to a range of mysterious and unscrupulous customers.",
       year: 2022,
@@ -333,7 +333,7 @@ function initTableGames(anyDb) {
       big: "/img/sh_big.jpg",
     },
     {
-      id: "7",
+      id: "8",
       name: "Little Nightmares",
       desc: "Set in a mysterious world, Little Nightmares follows the journey of Six, a hungry little girl who must escape the Maw, an iron vessel inhabited by monstrous, twisted beings.",
       year: 2017,
@@ -341,7 +341,7 @@ function initTableGames(anyDb) {
       big: "/img/ln_big.jpg",
     },
     {
-      id: "8",
+      id: "9",
       name: "Professor Layton and the Diaboloical Box ",
       desc: "The game follows Professor Layton and his self-proclaimed apprentice Luke as they travel cross-country by train to solve the mystery behind a mysterious box that is said to kill anyone who opens it. ",
       year: 2007,

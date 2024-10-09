@@ -177,6 +177,103 @@ img ~ a {
   padding: 1em 0.75em;
 }
 
+/* MODIFY/CREATE GAME */
+#gameFormContainer {
+  display: flex;
+  justify-content: center;
+}
+
+.gameForm {
+  display: grid;
+  grid-template-areas:
+    ". nameL nameI ."
+    ". yearL yearI ."
+    ". descL descI ."
+    ". iconL iconI ."
+    ". bigL bigI ."
+    ". . submit submit";
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  width: 80%;
+  align-items: center;
+  justify-items: start;
+}
+
+#nameL {
+  grid-area: nameL;
+  padding: 0;
+}
+
+#gamename {
+  grid-area: nameI;
+  border-radius: 5px;
+  border-style: none;
+  padding: 0.33em 0.5em;
+}
+
+#yearL {
+  grid-area: yearL;
+  padding: 0;
+}
+
+#gameyear {
+  grid-area: yearI;
+  border-radius: 5px;
+  border-style: none;
+  padding: 0.33em 0.5em;
+}
+
+#descL {
+  grid-area: descL;
+  padding: 0;
+}
+
+#gamedesc {
+  grid-area: descI;
+  color: #313036;
+  border-radius: 5px;
+  border-style: none;
+  padding: 0.33em 0.5em;
+}
+
+#iconL {
+  grid-area: iconL;
+  padding: 0;
+}
+
+#gameicon {
+  grid-area: iconI;
+  border-radius: 5px;
+  border-style: none;
+  padding: 0.33em 0.5em;
+}
+
+#bigL {
+  grid-area: bigL;
+  padding: 0;
+}
+
+#gamebig {
+  grid-area: bigI;
+  border-radius: 5px;
+  border-style: none;
+  padding: 0.33em 0.5em;
+}
+
+#editSubmit {
+  grid-area: submit;
+  background-color: #f4f2ff;
+  padding: 0.5em;
+  border-style: solid;
+  border-width: 3px;
+  border-color: #313036;
+  border-radius: 15px;
+}
+
+#editSubmit:hover {
+  background-color: #c9bfff;
+}
+
 /* LOGIN */
 #login {
   display: flex;

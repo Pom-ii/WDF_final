@@ -7,37 +7,43 @@
     {{/if}}
   </div>
   
-  <div>
+  <div id="gameFormContainer">
     {{#if game.gid}}
-      <form action="/game/modify/{{game.gid}}" method="POST">
+      <form action="/game/modify/{{game.gid}}" method="POST" class="gameForm">
     {{else}}
-      <form action="/game/new" method="POST">
+      <form action="/game/new" method="POST" class="gameForm">
     {{/if}}
-        <label for="gamename">Name: </label>
-        <input type="text" name="gamename" required="required" {{#if game.gname}} value="{{game.gname}}" {{/if}} />
-        <br />
-        <label for="gameyear">Year: </label>
+        <label for="gamename" id="nameL">Name: </label>
+        <input type="text" name="gamename" id="gamename" required="required" {{#if game.gname}} value="{{game.gname}}" {{/if}} />
+        <label for="gameyear" id="yearL">Year: </label>
         <input
           type="number"
           name="gameyear"
+          id="gameyear"
           min="1990"
           max="2050"
           required="required" {{#if game.gyear}} value="{{game.gyear}}" {{/if}}
         />
-        <br />
-        <label for="gamedesc">Game description: </label>
-        <textarea name="gamedesc" required="required" {{#if game.gdesc}} value="{{game.gdesc}}" {{/if}}></textarea>
-        <br />
+        <label for="gamedesc" id="descL">Game description: </label>
+        <textarea name="gamedesc" id="gamedesc" required="required" >{{#if game.gdesc}}{{game.gdesc}}{{/if}}</textarea>
 
-        <label for="gameurl">URL: </label>
+        <label for="gameicon" id="iconL"> Icon URL: </label>
         <input
           type="text"
-          name="gameurl"
-          placeholder="/img/something.jpg"
-          required="required" {{#if game.gurl}} value="{{game.gurl}}" {{/if}}
+          name="gameicon"
+          id="gameicon"
+          placeholder="/img/metroid.ico"
+          required="required" {{#if game.gicon}} value="{{game.gicon}}" {{/if}}
         />
-        <br />
-        <input type="submit" value={{#if game.gid}}"modify this game" {{else}}"add new game"{{/if}} />
+        <label for="gamebig" id="bigL"> Picture URL: </label>
+        <input
+          type="text"
+          name="gamebig"
+          id="gamebig"
+          placeholder="/img/metroid_big.png"
+          required="required" {{#if game.gbig}} value="{{game.gbig}}" {{/if}}
+        />
+        <input type="submit" id="editSubmit" value={{#if game.gid}}"modify this game"{{else}}"add new game"{{/if}} />
       </form>
   </div>
 </div>
