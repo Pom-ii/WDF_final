@@ -1,4 +1,4 @@
-<div>
+<div class="homePartial">
   <ul class="homeList">
     {{#each game}}
       <li class="homeListItem">
@@ -8,10 +8,13 @@
     {{/each}}
   </ul>
 </div>
-<div>
-  <form class="homeForm" action="/" method="POST"><input
-      type="submit"
-      name="page1"
-      value=">"
-    /></form>
+<div class="pageNr"><p class="current">1</p>
+  <p>//</p>
+  <p>2</p>
+  <p>//</p>
+  <p>3</p></div>
+<div class="homeForm">
+  <form action="/" method="POST">
+    <input type="submit" name="page1" value=">" />
+  </form>
 </div>

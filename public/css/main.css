@@ -118,13 +118,20 @@ h2 {
 }
 
 #games,
-#consoles {
+#consoles,
+#pairs {
   display: flex;
   justify-content: center;
 }
 
+#pairs {
+  flex-flow: column wrap;
+  align-items: center;
+}
+
 #gamesList,
-#consolesList {
+#consolesList,
+#pairsList {
   width: fit-content;
   border-radius: 15px;
   background-color: var(--bgWhite);
@@ -304,6 +311,19 @@ form label {
 }
 
 /* HOME */
+#homePartial {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.homePartial {
+  background-color: var(--bgWhite);
+  border-radius: 15px;
+  width: 40%;
+}
+
 .homeList {
   padding: 0;
 }
@@ -316,4 +336,22 @@ form label {
 
 .homeListItem > img {
   height: 5em;
+}
+
+.homeForm,
+.homeForm > form {
+  background-color: transparent;
+}
+
+.homeForm {
+  display: flex;
+}
+
+.pageNr {
+  display: flex;
+  gap: 2em;
+}
+
+.current {
+  color: #c9bfff;
 }

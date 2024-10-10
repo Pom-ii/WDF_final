@@ -311,8 +311,15 @@ app.get("/consoles", (req, res) => {
       //error log
       console.log("ERROR: ", error);
     } else {
-      model = { consoles: listOfConsoles };
-      res.render("consoles", model);
+      db.all("SELECT * FROM pairs", (error, listOfPairs) => {
+        if (error) {
+          //error log
+          console.log("ERROR: " + error);
+        } else {
+          model = { consoles: listOfConsoles, pairs: listOfPairs };
+          res.render("consoles", model);
+        }
+      });
     }
   });
 });
@@ -335,7 +342,7 @@ app.get("/logout", (req, res) => {
   });
 });
 
-//VIDEO GAMES DATABASE
+//VIDEO GAMES TABLE
 function initTableGames(anyDb) {
   const games = [
     {
@@ -404,7 +411,7 @@ function initTableGames(anyDb) {
     },
     {
       id: "9",
-      name: "Professor Layton and the Diaboloical Box ",
+      name: "Professor Layton and the Diaboloical Box",
       desc: "The game follows Professor Layton and his self-proclaimed apprentice Luke as they travel cross-country by train to solve the mystery behind a mysterious box that is said to kill anyone who opens it. ",
       year: 2007,
       icon: "/img/pl.png",
@@ -446,7 +453,7 @@ function initTableGames(anyDb) {
     }
   );
 }
-//CONSOLES DATABASE
+//CONSOLES TABLE
 function initTableConsoles(anyDb) {
   const consoles = [
     {
@@ -454,35 +461,40 @@ function initTableConsoles(anyDb) {
       name: "Playstation 3",
       year: 2006,
       brand: "Sony",
+      game: "The Last of Us",
     },
     {
       id: "01",
       name: "PC",
       year: 1962,
-      brand: "any",
+      brand: "---",
+      game: "Inscryption",
     },
     {
       id: "02",
       name: "Xbox 360",
       year: 2005,
       brand: "Microsoft",
+      game: "Bioshock",
     },
     {
       id: "03",
       name: "Nintendo Switch",
       year: 2017,
       brand: "Nintendo",
+      game: "Professor Layton and the Diaboloical Box",
     },
     {
       id: "04",
       name: "Steam Deck",
       year: 2022,
       brand: "Valve",
+      game: "Omori",
     },
   ];
 
   anyDb.run(
-    "CREATE TABLE consoles (cid INTEGER PRIMARY KEY AUTOINCREMENT, cname TEXT NOT NULL, cyear INT, cbrand TEXT NOT NULL)",
+    "CREATE TABLE consoles (cid INTEGER PRIMARY KEY AUTOINCREMENT, cname TEXT NOT NULL, cyear INT, cbrand TEXT NOT NULL, cgame TEXT NOT NULL)",
     (error) => {
       if (error) {
         //error log
@@ -492,8 +504,14 @@ function initTableConsoles(anyDb) {
 
         consoles.forEach((oneConsole) => {
           anyDb.run(
-            "INSERT INTO consoles (cid, cname, cyear, cbrand) VALUES (?, ?, ?, ?)",
-            [oneConsole.id, oneConsole.name, oneConsole.year, oneConsole.brand],
+            "INSERT INTO consoles (cid, cname, cyear, cbrand, cgame) VALUES (?, ?, ?, ?, ?)",
+            [
+              oneConsole.id,
+              oneConsole.name,
+              oneConsole.year,
+              oneConsole.brand,
+              oneConsole.game,
+            ],
             (error) => {
               if (error) {
                 //error log
@@ -508,10 +526,37 @@ function initTableConsoles(anyDb) {
     }
   );
 }
+//PAIRS TABLE
+function initTablePairs(anyDb) {
+  anyDb.run(
+    "CREATE TABLE IF NOT EXISTS pairs (pid INTEGER PRIMARY KEY AUTOINCREMENT, pgame TEXT NOT NULL, pconsole TEXT NOT NULL, UNIQUE(pgame, pconsole))",
+    (error) => {
+      if (error) {
+        //error log
+        console.log("ERROR", error);
+      } else {
+        console.log("---> Table pairs created!");
+
+        anyDb.run(
+          "INSERT INTO pairs (pgame, pconsole) SELECT games.gname, consoles.cname FROM games INNER JOIN consoles ON games.gname = consoles.cgame",
+          (error) => {
+            if (error) {
+              //error log
+              console.log("ERROR", error);
+            } else {
+              console.log("---> compatible pairs added into ptable pairs!");
+            }
+          }
+        );
+      }
+    }
+  );
+}
 
 // LISTEN
 app.listen(port, function () {
   //initTableGames(db);
   //initTableConsoles(db);
+  //initTablePairs(db);
   console.log("Server up and running, listening on port " + `${port}` + " ...");
 });
