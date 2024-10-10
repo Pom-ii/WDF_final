@@ -302,3 +302,18 @@ form label {
 #error {
   text-align: center;
 }
+
+/* HOME */
+.homeList {
+  padding: 0;
+}
+
+.homeListItem {
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+}
+
+.homeListItem > img {
+  height: 5em;
+}

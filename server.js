@@ -164,12 +164,34 @@ app.post("/game/modify/:gameid", (req, res) => {
 });
 
 app.post("/", (req, res) => {
-  model = {
-    whichPartial: function () {
-      return "page2";
-    },
-  };
-  res.render("home", model);
+  let gameIds;
+  let page;
+  if (req.body.page1) {
+    gameIds = [4, 5, 6];
+    page = "page2";
+  } else {
+    gameIds = [1, 2, 3];
+    page = "page3";
+  }
+  //console.log(req.body.page1);
+
+  db.all(
+    "SELECT * FROM games WHERE gid in (?, ?, ?)", //line ??? was adapted from https://stackoverflow.com/questions/2379357/what-is-the-best-way-to-select-multiple-rows-by-id-in-sql 10.10.2024
+    gameIds,
+    (error, listOfGames) => {
+      if (error) {
+        console.log("ERROR: ", error);
+      } else {
+        model = {
+          game: listOfGames,
+          whichPartial: function () {
+            return page;
+          },
+        };
+        res.render("home", model);
+      }
+    }
+  );
 });
 //--------------------------------------------------------------------------
 
@@ -177,20 +199,34 @@ app.post("/", (req, res) => {
 app.get("/", (req, res) => {
   //render home page
   /* res.render("home"); */
+  let gameIds;
+  let page;
+  if (req.query.page3) {
+    gameIds = [4, 5, 6];
+    page = "page2";
+  } else {
+    gameIds = [7, 8, 9];
+    page = "page1";
+  }
+  //console.log(gameIds, req.query.page3);
 
-  db.all("SELECT * FROM games", (error, listOfGames) => {
-    if (error) {
-      console.log("ERROR: ", error);
-    } else {
-      model = {
-        game: listOfGames,
-        whichPartial: function () {
-          return "page1";
-        },
-      };
-      res.render("home", model);
+  db.all(
+    "SELECT * FROM games WHERE gid in (?, ?, ?)", //line 182 was adapted from https://stackoverflow.com/questions/2379357/what-is-the-best-way-to-select-multiple-rows-by-id-in-sql 10.10.2024
+    gameIds,
+    (error, listOfGames) => {
+      if (error) {
+        console.log("ERROR: ", error);
+      } else {
+        model = {
+          game: listOfGames,
+          whichPartial: function () {
+            return page;
+          },
+        };
+        res.render("home", model);
+      }
     }
-  });
+  );
 });
 
 app.get("/about", (req, res) => {
