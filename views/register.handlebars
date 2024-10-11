@@ -1,0 +1,18 @@
+<div>
+  <h1>Create an Account</h1>
+  <div id="login">
+    <form action="/register" method="post">
+      <label for="username">Choose a Username:</label>
+      <input type="text" id="" name="username" /><br />
+      <label for="password">Choose a Password:</label>
+      <input type="password" id="" name="password" /><br />
+      <input type="submit" value="Register" />
+    </form>
+    {{#if error}}
+      <div id="error">{{error}}</div>
+    {{/if}}
+    {{#if message}}
+      <div id="message">{{message}}</div>
+    {{/if}}
+  </div>
+</div>
