@@ -16,6 +16,9 @@
           <li class="navList"><a href="/games">Games</a></li>
           <li class="navList"><a href="/consoles">Consoles</a></li>
           {{#if session.isLoggedIn}}
+            {{#if session.isAdmin}}
+              <li class="navList"><a href="/users">User Management</a></li>
+            {{/if}}
             <li class="navList">Hi
               {{session.name}}! -
               <a href="/logout">Logout</a></li>

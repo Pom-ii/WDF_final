@@ -1,0 +1,12 @@
+<div>
+  <h1>Modify User</h1>
+  <div id="userMod">
+    <form action="/user/modify/{{user.uid}}" method="post">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" value="{{user.uname}}" /><br />
+      <label for="userPassword">Password:</label>
+      <textarea id="userPassword" name="userPassword" required="required" />{{user.upassword}}</textarea> <br />
+      <input type="submit" value="modify user" />
+    </form>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+<div>
+  <h1>Users</h1>
+  <div id="users">
+    <ul id="usersList">
+      {{#each users}}
+        <li>{{uname}}</a>
+          {{#if ../session.isAdmin}}
+            ---
+            <a href="/user/modify/{{uid}}" class="modify">modify</a>
+            <a href="/user/delete/{{uid}}" class="delete">delete</a>
+          {{/if}}
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+  <div id="addUser">
+    <a href="/register">add new user</a>
+  </div>
+</div>

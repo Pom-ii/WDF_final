@@ -119,7 +119,8 @@ h2 {
 
 #games,
 #consoles,
-#pairs {
+#pairs,
+#users {
   display: flex;
   justify-content: center;
 }
@@ -131,7 +132,8 @@ h2 {
 
 #gamesList,
 #consolesList,
-#pairsList {
+#pairsList,
+#usersList {
   width: fit-content;
   border-radius: 15px;
   background-color: var(--bgWhite);
@@ -153,7 +155,8 @@ img ~ a {
   padding: 1em;
 }
 
-#addNew {
+#addNew,
+#addUser {
   text-align: center;
 }
 
@@ -282,7 +285,8 @@ img ~ a {
 }
 
 /* LOGIN */
-#login {
+#login,
+#userMod {
   display: flex;
   flex-flow: column wrap;
   align-content: center;
@@ -354,4 +358,13 @@ form label {
 
 .current {
   color: #c9bfff;
+}
+
+/* USER MANGEMENT */
+
+#userPassword {
+  color: #313036;
+  border-radius: 5px;
+  border-style: none;
+  padding: 0.33em 0.5em;
 }
