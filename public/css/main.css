@@ -12,14 +12,17 @@
 
 body {
   background-color: #313036;
+  height: 100vh;
 }
 
 h1 {
   font-size: 3rem;
+  text-align: center;
 }
 
 h2 {
   font-size: 1.5rem;
+  text-align: center;
 }
 
 a {
@@ -64,8 +67,7 @@ nav {
   color: #313036;
 }
 
-/* ABOUT */
-/* images */
+/* IMAGES */
 #dogs {
   display: flex;
   height: 80%;
@@ -78,10 +80,8 @@ nav {
   box-shadow: 10px 10px #f4f2ff;
 }
 
-/* text boxes */
-h1,
-h2 {
-  text-align: center;
+.gameIcons {
+  height: 2em;
 }
 
 #aboutDesc {
@@ -89,38 +89,12 @@ h2 {
   justify-content: center;
 }
 
-#aboutDesc > p {
-  line-height: 1.5em;
-  padding: 1em;
-  background-color: var(bgWhite);
-  border-radius: 15px;
-  width: fit-content;
-}
-
-/* CONTACT */
-#contact {
-  display: flex;
-  flex-flow: column wrap;
-  align-items: center;
-}
-
-#contactList {
-  background-color: var(--bgWhite);
-  border-radius: 15px;
-  width: fit-content;
-  padding: 1em;
-}
-
-/* GAMES & CONSOLES */
-/* images */
-.gameIcons {
-  height: 2em;
-}
-
+/* LISTS FOR GAMES, CONSOLES, USER MANAGEMENT, CONTACT */
 #games,
 #consoles,
 #pairs,
-#users {
+#users,
+#contact {
   display: flex;
   justify-content: center;
 }
@@ -133,15 +107,21 @@ h2 {
 #gamesList,
 #consolesList,
 #pairsList,
-#usersList {
+#usersList,
+#contactList {
   width: fit-content;
   border-radius: 15px;
   background-color: var(--bgWhite);
   padding: 1.5em 1.25em;
 }
 
+#contactList {
+  padding: 1em;
+}
+
 #gamesList > li,
-#consolesList > li {
+#consolesList > li,
+#pairsList > li {
   display: flex;
   font-size: 16pt;
   align-items: center;
@@ -149,10 +129,6 @@ h2 {
 
 #consolesList > li {
   line-height: 1.5em;
-}
-
-img ~ a {
-  padding: 1em;
 }
 
 #addNew,
@@ -173,17 +149,21 @@ img ~ a {
   box-shadow: 10px 10px #f4f2ff;
 }
 
+img ~ a {
+  padding: 1em;
+}
+
 #game {
   display: flex;
   justify-content: center;
 }
 
-#game > p {
+#game > p,
+#aboutDesc > p {
   width: 75%;
-  border-style: solid;
-  border-width: 5px;
+  border: solid 5px #f4f2ff;
   border-radius: 15px;
-  border-color: #f4f2ff;
+  line-height: 1.5em;
   padding: 1em 0.75em;
 }
 
@@ -367,4 +347,15 @@ form label {
   border-radius: 5px;
   border-style: none;
   padding: 0.33em 0.5em;
+}
+
+/* RESPONSIVE */
+@media screen and (max-width: 500px) {
+  * {
+    font-size: 12pt;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
 }

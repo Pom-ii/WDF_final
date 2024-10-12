@@ -228,9 +228,12 @@ app.post("/", (req, res) => {
   //console.log(req.body.page1);
 
   db.all(
-    "SELECT * FROM games WHERE gid in (?, ?, ?)", //line ??? was adapted from https://stackoverflow.com/questions/2379357/what-is-the-best-way-to-select-multiple-rows-by-id-in-sql 10.10.2024
+    //Code borrowed from a website - BEGIN
+    //Source: (anthares, 2010, "What is the best way to select multiple rows by ID in sql?",https://stackoverflow.com/questions/2379357/what-is-the-best-way-to-select-multiple-rows-by-id-in-sql)
+    "SELECT * FROM games WHERE gid in (?, ?, ?)",
     gameIds,
     (error, listOfGames) => {
+      //Code borrowed from a websiet - END
       if (error) {
         console.log("ERROR: ", error);
       } else {
@@ -349,9 +352,12 @@ app.get("/", (req, res) => {
   //console.log(gameIds, req.query.page3);
 
   db.all(
-    "SELECT * FROM games WHERE gid in (?, ?, ?)", //line 182 was adapted from https://stackoverflow.com/questions/2379357/what-is-the-best-way-to-select-multiple-rows-by-id-in-sql 10.10.2024
+    //Code borrowed from a website - BEGIN
+    //Source: (anthares, 2010, "What is the best way to select multiple rows by ID in sql?",https://stackoverflow.com/questions/2379357/what-is-the-best-way-to-select-multiple-rows-by-id-in-sql)
+    "SELECT * FROM games WHERE gid in (?, ?, ?)",
     gameIds,
     (error, listOfGames) => {
+      //Code borrowed from a website - END
       if (error) {
         console.log("ERROR: ", error);
       } else {
@@ -790,9 +796,9 @@ function initTableUsers(anyDb) {
 
 // LISTEN
 app.listen(port, function () {
-  //initTableGames(db);
-  //initTableConsoles(db);
-  //initTablePairs(db);
-  //initTableUsers(db);
+  initTableGames(db);
+  initTableConsoles(db);
+  initTablePairs(db);
+  initTableUsers(db);
   console.log("Server up and running, listening on port " + `${port}` + " ...");
 });
