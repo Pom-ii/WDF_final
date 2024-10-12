@@ -130,7 +130,9 @@ nav {
   align-items: center;
 }
 
-#consolesList > li {
+#consolesList > li,
+#pairsList > li,
+#usersList > li {
   line-height: 1.5em;
 }
 
