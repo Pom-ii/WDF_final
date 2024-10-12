@@ -3,7 +3,7 @@
   <div id="users">
     <ul id="usersList">
       {{#each users}}
-        <li>{{uname}}</a>
+        <li>{{urole}} {{uname}}</a>
           {{#if ../session.isAdmin}}
             ---
             <a href="/user/modify/{{uid}}" class="modify">modify</a>

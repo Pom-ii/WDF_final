@@ -6,6 +6,11 @@
       <input type="text" id="username" name="username" value="{{user.uname}}" /><br />
       <label for="userPassword">Password:</label>
       <textarea id="userPassword" name="userPassword" required="required" />{{user.upassword}}</textarea> <br />
+      <label for="role">Role: </label>
+        <select name="userRole" id="userRole">
+          <option value="User" {{#if (eq user.urole "User")}} selected="selected"{{/if}} >User</option>
+          <option value="Assistant" {{#if (eq user.urole "Admin")}} selected="selected"{{/if}} >Assistant</option>
+        </select> <br />
       <input type="submit" value="modify user" />
     </form>
   </div>

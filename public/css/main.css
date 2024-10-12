@@ -289,7 +289,8 @@ form {
 }
 
 form input,
-[type="submit"] {
+[type="submit"],
+#userRole {
   color: #313036;
 }
 
