@@ -56,6 +56,7 @@ nav {
   width: 100%;
   text-align: center;
   justify-content: center;
+  padding: 0;
 }
 
 .navList {
@@ -68,16 +69,19 @@ nav {
 }
 
 /* IMAGES */
+
 #dogs {
   display: flex;
   height: 80%;
   justify-content: space-evenly;
+  padding-bottom: 1em;
 }
 
 .dogs {
-  height: 80%;
   border-radius: 15px;
   box-shadow: 10px 10px #f4f2ff;
+  max-width: 65%;
+  height: auto;
 }
 
 .gameIcons {
@@ -141,10 +145,15 @@ nav {
   text-align: center;
 }
 
+#addNew > h2 {
+  padding-bottom: 1em;
+}
+
 /* SINGLE GAME VIEW & ABOUT */
 
 img ~ a {
   padding: 1em;
+  text-align: center;
 }
 
 #game,
@@ -211,6 +220,7 @@ img ~ a {
 #descL {
   grid-area: descL;
   padding: 0;
+  text-align: start;
 }
 
 #gamedesc {
@@ -255,6 +265,11 @@ img ~ a {
 
 #editSubmit:hover {
   background-color: #c9bfff;
+}
+
+.modify,
+.delete {
+  color: #c9bfff;
 }
 
 /* LOGIN & USER MANAGEMENT*/
@@ -333,6 +348,41 @@ form label {
 }
 
 /* RESPONSIVE */
+@media screen and (max-width: 700px) {
+  #dogs {
+    display: flex;
+    flex-flow: column nowrap;
+    height: fit-content;
+  }
+  .dogs {
+    margin: 1em;
+    max-width: 100%;
+  }
+
+  .gameForm {
+    grid-template-areas:
+      "nameL nameI"
+      "yearL yearI"
+      "descL descI"
+      "iconL iconI"
+      "bigL bigI"
+      ". submit";
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  #gamesList > li,
+  #consolesList > li,
+  #pairsList > li {
+    font-size: 14pt;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .navList > a {
+    font-size: 12pt;
+  }
+}
+
 @media screen and (max-width: 500px) {
   * {
     font-size: 12pt;
@@ -340,5 +390,17 @@ form label {
 
   h1 {
     font-size: 2rem;
+  }
+
+  #navList {
+    flex-flow: row wrap;
+  }
+
+  .navList {
+    padding: 0 0.25em 0.5em 0.25em;
+  }
+
+  #gamesList {
+    width: 90%;
   }
 }
